@@ -1,13 +1,23 @@
-from twilio.rest import Client 
- 
-account_sid = 'AC4a4e3b1f97a09184b674c170aad715bc' 
-auth_token = '[AuthToken]' 
-client = Client(account_sid, auth_token) 
- 
-message = client.messages.create( 
-                              from_='whatsapp:+14155238886',  
-                              body='Heyy...the bot is ready',      
-                              to='whatsapp:+919048223801' 
-                          ) 
- 
-print(message.sid)
+from flask import Flask, request
+from twilio.twiml.messaging_response import MessagingResponse
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello():
+    return "Hello, World!"
+
+@app.route("/sms", methods=['POST'])
+def sms_reply():
+    """Respond to incoming calls with a simple text message."""
+    # Fetch the message
+    msg = request.form.get('Body')
+
+    # Create reply
+    resp = MessagingResponse()
+    resp.message("You said: {}".format(msg))
+
+    return str(resp)
+
+if __name__ == "__main__":
+    app.run(debug=True)
