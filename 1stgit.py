@@ -8,7 +8,7 @@ from twilio.rest import Client
 
 load_dotenv()
 
-Client = Client("AC4a4e3b1f97a09184b674c170aad715bc","a8d91a6799b9f1d7535ae471f7ef0ad4")
+Client = Client("AC4a4e3b1f97a09184b674c170aad715bc","ed386c0a50cc47cb530c5592430940f3")
 
 app = Flask(__name__)
 
@@ -48,7 +48,7 @@ def reply():
             im_1 = image_1.convert('RGB')
             im_1.save(r'H:\XAMPP\htdocs\CtrlAltDel.pdf')
             
-            message = Client.messages.create(body='take this',media_url='https://0cfc-103-85-204-218.in.ngrok.io/CtrlAltDel.pdf',from_=fro,to=sender)
+            message = Client.messages.create(body='take this',media_url='https://4f2a-103-85-204-218.in.ngrok.io/CtrlAltDel.pdf',from_=fro,to=sender)
             return str(response)
 
         else:

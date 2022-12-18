@@ -1,10 +1,7 @@
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
-from translate import Translator
 
 app = Flask(__name__)
-
-translator= Translator(to_lang="Malayalam")
 
 @app.route("/")
 def hello():
@@ -15,13 +12,12 @@ def sms_reply():
     """Respond to incoming calls with a simple text message."""
     # Fetch the message
     msg = request.form.get('Body')
-    translation = translator.translate(msg)
+
     # Create reply
     resp = MessagingResponse()
-    resp.message("In Malayalam it is: {}".format(translation))
+    resp.message("You said: {}".format(msg))
 
     return str(resp)
 
 if __name__ == "__main__":
     app.run(debug=True)
-
